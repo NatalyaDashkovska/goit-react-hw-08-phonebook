@@ -40,10 +40,17 @@ const filterReducer = createReducer('', {
   [filterValue]: (_, { payload }) => payload,
 });
 
+const error = createReducer(null, {
+  [makeCardError]: (_, { payload }) => payload,
+  [deleteCardError]: (_, { payload }) => payload,
+  [fetchContactsError]: (_, { payload }) => payload,
+});
+
 const rootReducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
   loading,
+  error,
 });
 
 export default rootReducer;

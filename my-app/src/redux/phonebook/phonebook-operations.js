@@ -10,15 +10,11 @@ const fetchContacts = () => async dispatch => {
   } catch (error) {
     dispatch(actions.fetchContactsError(error.message));
   }
-  //   axios
-  //     .get(`/contacts`)
-  //     .then(({ data }) => dispatch(actions.fetchContactsSuccess(data)))
-  //     .catch(error => dispatch(actions.fetchContactsError(error)));
 };
 
 const makeCard = (name, number) => dispatch => {
   const contact = { name, number };
-  console.log(contact);
+  // console.log(contact);
   dispatch(actions.makeCardRequest());
   axios
     .post('/contacts', contact)

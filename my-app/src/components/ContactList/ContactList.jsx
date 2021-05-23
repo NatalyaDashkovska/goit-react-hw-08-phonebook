@@ -22,13 +22,6 @@ const ContactList = ({ contacts, onDeleteCard }) => {
   );
 };
 
-// const getVisible = (allContacts, filter) => {
-//   const normalize = filter.toLowerCase();
-//   return allContacts.filter(({ text }) =>
-//     text.toLowerCase().includes(normalize),
-//   );
-// };
-
 const mapStateToProps = state => {
   return { contacts: phonebookSelectors.getVisibleContacts(state) };
 };

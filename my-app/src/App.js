@@ -1,19 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
-//https://connections-api.herokuapp.com
-import ContactForm from './components/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
+
 import AppBar from './components/AppBar';
 import styles from './index.module.css';
 import { Switch, Router, Route } from 'react-router-dom';
-import { phonebookOperations, phonebookSelectors } from './redux/phonebook';
-import RegisterView from './views/RegisterView';
-import LoginView from './views/LoginView';
-import PhonebookView from './views/PhonebookView';
-import HomeView from './views/HomeView';
 
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 import { authOperations } from './redux/auth';
+
+const HomeView = lazy(() =>
+  import('./views/HomeView.jsx' /* webpackChunkName: "home-view" */),
+);
+const LoginView = lazy(() =>
+  import('./views/LoginView.jsx' /* webpackChunkName: "login-view" */),
+);
+const PhonebookView = lazy(() =>
+  import('./views/PhonebookView.jsx' /* webpackChunkName: "phonebook-view" */),
+);
+const RegisterView = lazy(() =>
+  import('./views/RegisterView' /* webpackChunkName: "register-view" */),
+);
 
 class App extends Component {
   componentDidMount() {
@@ -22,17 +29,29 @@ class App extends Component {
   render() {
     return (
       <>
-        {/* <RegisterView /> */}
-        {/* <LoginView /> */}
-        {/* <PhonebookView /> */}
-        {/* <HomeView /> */}
         <AppBar />
-        <Switch>
-          <Route exact path="/" component={HomeView} />
-          <Route path="/register" component={RegisterView} />
-          <Route path="/login" component={LoginView} />
-          <Route path="/contacts" component={PhonebookView} />
-        </Switch>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Switch>
+            <Route exact path="/" component={HomeView} />
+            <PublicRoute
+              path="/register"
+              restricted
+              component={RegisterView}
+              redirectTo="/contacts"
+            />
+            <PublicRoute
+              path="/login"
+              restricted
+              component={LoginView}
+              redirectTo="/contacts"
+            />
+            <PrivateRoute
+              path="/contacts"
+              component={PhonebookView}
+              redirectTo="/login"
+            />
+          </Switch>
+        </Suspense>
       </>
     );
   }
