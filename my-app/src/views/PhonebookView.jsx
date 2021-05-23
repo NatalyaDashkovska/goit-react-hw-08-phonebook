@@ -9,7 +9,6 @@ import styles from '../index.module.css';
 import { phonebookOperations, phonebookSelectors } from '../redux/phonebook';
 
 class Phonebook extends Component {
-  state = { a: 4 };
   componentDidMount() {
     this.props.fetchContacts();
   }
