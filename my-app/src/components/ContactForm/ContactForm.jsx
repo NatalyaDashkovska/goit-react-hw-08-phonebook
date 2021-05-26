@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import styles from './ContactForm.module.css';
 import { phonebookOperations, phonebookSelectors } from '../../redux/phonebook';
 class Form extends Component {
-  loginId = uuidv4();
-  telId = uuidv4();
   state = {
     name: '',
     number: '',
@@ -45,7 +43,6 @@ class Form extends Component {
           <input
             type="text"
             name="name"
-            id={this.loginId}
             value={this.state.name}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -57,7 +54,6 @@ class Form extends Component {
           <input
             type="tel"
             name="number"
-            id={this.telId}
             value={this.state.number}
             pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
             title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"

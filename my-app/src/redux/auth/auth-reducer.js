@@ -11,17 +11,21 @@ const user = createReducer(InitialUserState, {
   [authActions.getCurrentUserSuccess]: (_, { payload }) => payload,
 });
 
-const token = createReducer(InitialUserState, {
+const token = createReducer(null, {
   [authActions.registerSuccess]: (_, { payload }) => payload.token,
   [authActions.loginSuccess]: (_, { payload }) => payload.token,
   [authActions.logoutSuccess]: () => null,
 });
 
-const error = createReducer(InitialUserState, {
+const error = createReducer(null, {
   [authActions.registerError]: (_, { payload }) => payload,
   [authActions.loginError]: (_, { payload }) => payload,
   [authActions.logoutError]: (_, { payload }) => payload,
   [authActions.getCurrentUserError]: (_, { payload }) => payload,
+  [authActions.registerSuccess]: () => null,
+  [authActions.loginSuccess]: () => null,
+  [authActions.logoutSuccess]: () => null,
+  [authActions.getCurrentUserSuccess]: () => null,
 });
 
 const isAuthenticated = createReducer(false, {

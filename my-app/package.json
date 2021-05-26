@@ -2,7 +2,6 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://natalyadashkovska.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
     "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.13.12",
     "@reduxjs/toolkit": "^1.5.1",
@@ -30,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "netlify deploy -p",
+    "netlify": "netlify"
   },
   "browserslist": {
     "production": [
